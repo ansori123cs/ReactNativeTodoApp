@@ -17,6 +17,7 @@ const calendar = () => {
   const loadTodos = async () => {
     try {
       const storedTodos = await AsyncStorage.getItem('todos');
+      // const clearAyncStorage = await AsyncStorage.clear();
       if (storedTodos) {
         setTodos(JSON.parse(storedTodos));
       }
@@ -62,10 +63,14 @@ const calendar = () => {
       <DateTimePickerModal isVisible={isDatePickerVisible} mode='date' onConfirm={handleConfirmDate} onCancel={() => setDatePickerVisibility(false)} />
 
       <Calendar
-        markedDates={todos.reduce((acc, todo) => {
-          acc[todo.date] = { marked: true, dotColor: 'red' };
-          return acc;
-        }, {} as Record<string, any>)}
+        markedDates={
+          todos
+            ? Object.keys(todos).reduce((acc, date) => {
+                acc[date] = { marked: true, dotColor: 'red' };
+                return acc;
+              }, {} as Record<string, any>)
+            : {}
+        }
         onDayPress={(day) => setSelectedDate(day.dateString)}
         enableSwipeMonths={true}
         theme={{
