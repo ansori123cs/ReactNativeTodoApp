@@ -7,6 +7,7 @@ import { images } from '@/constants/images';
 import { icons } from '@/constants/icons';
 import CustomButton from '@/components/CustomButton';
 import Checkbox from 'expo-checkbox';
+
 import RenderFlatlist from '@/components/RenderFlatList';
 
 const data = [
